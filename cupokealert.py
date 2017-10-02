@@ -7,7 +7,7 @@ param_loc = "/home/kshi/Scripts/cupokealert/params"
 discord_username = 'CU Poke Alert'
 discord_avatar = 'http://pm1.narvii.com/5806/3200d002d594db75d61003d7dc9fd3c02762bf20_128.jpg'
 Mudd = (40.8072473, -73.9615573)
-max_km = 1.5
+max_km = 2
 
 def dist_in_km(phi, theta):
     return round(vincenty(Mudd, (phi, theta)).kilometers, 3)
@@ -22,10 +22,12 @@ keywords = {'Dragonite',
             'Chansey',
             'Blissey',
             'Pupitar',
+            'Dragonair',
             'Unknown',
             'Lapras',
             'Ampharos',
             'Flaaffy',
+            'Snorlax',
             '100%'}
 
 params = open(param_loc,"r")
@@ -53,10 +55,10 @@ for tweet in reversed(tweets):
                 text = ' '.join(text_array[0:-2])
                 iv_text = re.search('IV: \d+%', text)
                 cp_text = re.search('CP: \d+\)', text)
-                iv = "(" + iv_text.group(0) + ")" if iv_text else ''
-                cp = "(" + cp_text.group(0).replace(')','') + ")" if cp_text else ''                
+                iv = "( " + iv_text.group(0) + " )" if iv_text else ''
+                cp = "( " + cp_text.group(0).replace(')','') + " )" if cp_text else ''                
                 data = re.search('until.+',text).group(0)
-                content = pokemon + ' ' + iv + ' ' + cp + ' (' + str(distance) + ' km) ' + data + '\n' + url_nycpokemap + '  ' + url_googlemap
+                content = pokemon + ' ' + iv + ' ' + cp + ' ( ' + str(distance) + ' km ) ' + data + '\n' + url_nycpokemap + '  ' + url_googlemap
                 webhook = Webhook(credentials.discord_webhook, content, discord_username, discord_avatar)
                 webhook.format()
                 webhook.post()
