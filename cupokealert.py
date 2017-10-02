@@ -58,7 +58,7 @@ for tweet in reversed(tweets):
                 iv = "( " + iv_text.group(0) + " )" if iv_text else ''
                 cp = "( " + cp_text.group(0).replace(')','') + " )" if cp_text else ''                
                 data = re.search('until.+',text).group(0)
-                content = pokemon + ' ' + iv + ' ' + cp + ' ( ' + str(distance) + ' km ) ' + data + '\n' + url_nycpokemap + '  ' + url_googlemap
+                content = pokemon + ' ' + iv + ' ' + cp  + data + ' ( ' + str(distance) + ' km away ) ' + '\n' + url_nycpokemap + '  ' + url_googlemap
                 webhook = Webhook(credentials.discord_webhook, content, discord_username, discord_avatar)
                 webhook.format()
                 webhook.post()
