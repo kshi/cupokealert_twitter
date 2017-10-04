@@ -5,12 +5,12 @@ import credentials
 
 param_loc = "/home/kshi/Scripts/cupokealert/params"
 discord_username = 'CU Poke Alert'
-discord_avatar = 'http://pm1.narvii.com/5806/3200d002d594db75d61003d7dc9fd3c02762bf20_128.jpg'
+discord_avatar = 'http://i.imgur.com/75pkyxS.jpg'
 Mudd = (40.8072473, -73.9615573)
-max_km = 2
+max_km = 1.5
 
 def dist_in_km(phi, theta):
-    return round(vincenty(Mudd, (phi, theta)).kilometers, 3)
+    return round(vincenty(Mudd, (phi, theta)).kilometers, 2)
 
 api = twitter.Api(consumer_key=credentials.consumer_key,
                   consumer_secret=credentials.consumer_secret,
@@ -28,7 +28,8 @@ keywords = {'Dragonite',
             'Ampharos',
             'Flaaffy',
             'Snorlax',
-            '100%'}
+            '100%',
+            '97%'}
 
 params = open(param_loc,"r")
 last_query_id = params.read()
